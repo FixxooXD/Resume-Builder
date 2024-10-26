@@ -1,6 +1,4 @@
 "use client";
-
-import '../globals.css';
 import { usePersonalInfo } from '@/lib/context/PersonalDataContext';
 
 const ResumePreview = () => {

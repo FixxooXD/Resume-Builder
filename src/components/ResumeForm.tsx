@@ -2,19 +2,18 @@
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { resumeSchema } from '../schemas/zodResumeFormSchema';
+import { resumeSchema } from '@/app/schemas/zodResumeFormSchema';
 import { z } from 'zod';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { usePersonalInfo } from '@/lib/context/PersonalDataContext';
 import { useEffect } from 'react';
-
 // TypeScript types from the Zod schema
-export type ResumeFormValues = z.infer<typeof resumeSchema>;
+ type ResumeFormValuesTypes = z.infer<typeof resumeSchema>;
 
 const ResumeForm = () => {
   // Initialize React Hook Form with Zod resolver
-  const { register, setValue, handleSubmit, watch, formState: { errors } } = useForm<ResumeFormValues>({
+  const { register, setValue, handleSubmit, watch, formState: { errors } } = useForm<ResumeFormValuesTypes>({
     resolver: zodResolver(resumeSchema),
   });
   
@@ -32,7 +31,7 @@ const ResumeForm = () => {
  const { setPersonalInfo } = usePersonalInfo(); // Fallback to an empty object if undefined
 
   // Handle form submission
-  const onSubmit = (data: ResumeFormValues) => {
+  const onSubmit = (data: ResumeFormValuesTypes) => {
        console.log(data);
        if (setPersonalInfo) {
         console.log(setPersonalInfo(data));
